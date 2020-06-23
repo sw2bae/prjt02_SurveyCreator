@@ -17,12 +17,12 @@ const API = {
       data: JSON.stringify(example)
     });
   },
-  getExamples: function () {
-    return $.ajax({
-      url: 'api/examples',
-      type: 'GET'
-    });
-  },
+  // getExamples: function () {
+  //   return $.ajax({
+  //     url: 'api/examples',
+  //     type: 'GET'
+  //   });
+  // },
   deleteExample: function (id) {
     return $.ajax({
       url: 'api/examples/' + id,
@@ -32,33 +32,33 @@ const API = {
 };
 
 // refreshExamples gets new examples from the db and repopulates the list
-const refreshExamples = function () {
-  API.getExamples().then(function (data) {
-    const $examples = data.map(function (example) {
-      const $a = $('<a>')
-        .text(example.text)
-        .attr('href', '/example/' + example.id);
+// const refreshExamples = function () {
+// API.getExamples().then(function (data) {
+// const $examples = data.map(function (example) {
+//   const $a = $('<a>')
+//     .text(example.text)
+//     .attr('href', '/example/' + example.id);
 
-      const $li = $('<li>')
-        .attr({
-          class: 'list-group-item',
-          'data-id': example.id
-        })
-        .append($a);
+//   const $li = $('<li>')
+//     .attr({
+//       class: 'list-group-item',
+//       'data-id': example.id
+//     })
+//     .append($a);
 
-      const $button = $('<button>')
-        .addClass('btn btn-danger float-right delete')
-        .text('ｘ');
+//   const $button = $('<button>')
+//     .addClass('btn btn-danger float-right delete')
+//     .text('ｘ');
 
-      $li.append($button);
+//   $li.append($button);
 
-      return $li;
-    });
-
-    $exampleList.empty();
-    $exampleList.append($examples);
-  });
-};
+//   return $li;
+// });
+// location.reload()
+// $exampleList.empty();
+// $exampleList.append($examples);
+// });
+// };
 
 // handleFormSubmit is called whenever we submit a new example
 // Save the new example to the db and refresh the list
@@ -76,11 +76,12 @@ const handleFormSubmit = function (event) {
   }
 
   API.saveExample(example).then(function () {
-    refreshExamples();
+    // refreshExamples();
+    location.reload();
   });
 
-  $exampleText.val('');
-  $exampleDescription.val('');
+  // $exampleText.val('');
+  // $exampleDescription.val('');
 };
 
 // handleDeleteBtnClick is called when an example's delete button is clicked
@@ -91,7 +92,8 @@ const handleDeleteBtnClick = function () {
     .attr('data-id');
 
   API.deleteExample(idToDelete).then(function () {
-    refreshExamples();
+    // refreshExamples();
+    location.reload();
   });
 };
 
