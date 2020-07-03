@@ -2,6 +2,8 @@ require('dotenv').config();
 const express = require('express');
 const Handlebars = require('handlebars');
 const exphbs = require('express-handlebars');
+const passport = require("./config/passport");
+const expressSession = require("express-session");
 const {
   allowInsecurePrototypeAccess
 } = require('@handlebars/allow-prototype-access');
@@ -17,7 +19,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.static('public'));
 app.use(morgan('dev'));
-
+app.use(expressSession({ secret: process.env.sessionSecret, resave: true, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
 // Handlebars
 app.engine(
   'handlebars',
@@ -31,7 +35,7 @@ app.set('view engine', 'handlebars');
 // Routes
 app.use(routes);
 
-const syncOptions = { force: false };
+const syncOptions = { force: true };
 
 // If running a test, set syncOptions.force to true
 // clearing the `testdb`
