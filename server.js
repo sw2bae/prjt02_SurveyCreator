@@ -35,7 +35,7 @@ app.set('view engine', 'handlebars');
 // Routes
 app.use(routes);
 
-const syncOptions = { force: true };
+const syncOptions = { force: false };
 
 // If running a test, set syncOptions.force to true
 // clearing the `testdb`

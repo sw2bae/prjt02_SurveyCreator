@@ -61,11 +61,6 @@ htmlRoutes.get('/surveys/result/:id', async (req, res) => {
     },
     include: [db.Survey_Results]
   });
-  const survey_answers = await db.Survey_Results.findAll({
-    where: {
-
-    }
-  });
 
   console.log(survey_questions[0]);
   console.log(survey_questions[0].Survey_Results);

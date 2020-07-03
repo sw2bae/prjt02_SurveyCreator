@@ -4,7 +4,6 @@ const $createBtn = $('.create-Btn');
 const $deleteBtn = $('.delete-Btn');
 const $resultBtn = $('.result-Btn');
 const $createSurveyBtn = $('#createSurvey-Btn');
-// const $surveyId = $('#survey_Id').attr("value");
 const $questionId = $('#question_Id').attr("value");
 const $takeSurveyBtn = $('.takeSurveyBtn');
 
